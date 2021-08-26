@@ -1,6 +1,7 @@
 const mongoose = require("mongoose")
 const PostModel = mongoose.Schema(
     {
+        uId : String,
         title : String,
         created_on: {
             type : Date,

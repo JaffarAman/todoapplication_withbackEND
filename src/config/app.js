@@ -1,32 +1,36 @@
 const Express = require("express")
 const app = Express()
-const port = 5000
+const port = 3000
 const cors = require("cors")
 const mongoose = require("mongoose")
 const DB_URI = "mongodb+srv://admin:admin@cluster0.xwthx.mongodb.net/todo"
 const postModel = require("./Schema")
+///body allow///
 app.use(Express.urlencoded({ extended: true }));
 app.use(Express.json())
 app.use(cors());
+
 
 mongoose.connect(DB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
+
 mongoose.connection.on("connected", () => console.log("mongoose is Connected"))
 mongoose.connection.on("error", () => console.log("Mongoose is not Connected Error"))
 
 
 app.post("/post", (req, res) => {
-    let {title} = req.body
+    let {title ,uId} = req.body
     console.log(title);
     let obj = {
-        title : title
+        title : title,
+        uId : uId
     }
     try {
         postModel.create(obj, (err, data) => {
             if (err) {
-                throw err
+                throw ere
             } else {
                 res.send("SuccessFully Post YOUR ITME")
             }
@@ -61,6 +65,23 @@ app.delete("/" , (req,res)=>{
         })
 })
 
+app.post("/delOne" , (req,res)=>{
+    console.log(req.body);
+    const body = req.body
+    postModel.deleteOne({uId:body.uId},(err,data)=>{
+        try {
+                if(err){
+                    throw err
+                }else{
+                    res.send("SUCCESSFULLT DELETE")
+                    console.log(data);
+
+                }
+        } catch (error) {
+                res.send(error)
+        }   
+    })
+})
 
 app.listen(port, () => console.log(`Server is Running on localhost:${port}`))
 
