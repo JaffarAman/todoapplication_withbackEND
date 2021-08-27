@@ -7,11 +7,46 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
   margin: 10px 0;
+}
+.heading{
+  text-align: center;
+  background-color: lightskyblue;
+  padding: 8px;
+  margin-bottom: 15px;
 }
 li{
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   font-size: 25px;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: lightskyblue;
+  font-family: cursive;
+}
+.todoText{
+  width: 500px;
+ 
+}
+
+li .todoBtns{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 250px;
+
+
+}
+
+@media only screen and (max-width:430px){
+         li{
+           flex-wrap: wrap;
+         }
+         .todoText{
+           text-align: center;
+         }
+
 }

@@ -3,7 +3,6 @@ import Input from "./component/TextField";
 import Btn from "./component/btns";
 import TodoBtn from "./component/todoBtn";
 import axios from "axios"
-// import MediaCard from "./component/Card";
 import "./App.css";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -135,7 +134,7 @@ function App() {
 
   return (
     <div>
-      <h1 style={{ textAlign: "center", margin: 10 }}>TODO APPLICATION</h1>
+      <h1  className="heading">TODO APPLICATION</h1>
 
       <div className="header">
         <Input inpValue={value} value={getInputValue} />
@@ -144,13 +143,21 @@ function App() {
       </div>
 
       <section>
-        <ul>
+        <ul className="todoList">
           {todo.map((val, ind) => {
             return (
               <li key={ind}>
+
+                <div className="todoText">
                 {val.title}
+
+                </div>
+                
+                <div className="todoBtns">
                 <TodoBtn btnValue="EDIT" color="primary" indexNum={ind} setFun={edit} />
                 <TodoBtn btnValue="DEL TODO" color="secondary" indexNum={ind} setFun={del} />
+
+                </div>
               </li>
             );
           })}
