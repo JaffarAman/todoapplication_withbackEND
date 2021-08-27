@@ -1,6 +1,6 @@
 const Express = require("express")
 const app = Express()
-const port = 3000
+const port = 5000
 const cors = require("cors")
 const mongoose = require("mongoose")
 const DB_URI = "mongodb+srv://admin:admin@cluster0.xwthx.mongodb.net/todo"
@@ -9,6 +9,7 @@ const postModel = require("./Schema")
 app.use(Express.urlencoded({ extended: true }));
 app.use(Express.json())
 app.use(cors());
+
 
 
 mongoose.connect(DB_URI, {
@@ -82,6 +83,29 @@ app.post("/delOne" , (req,res)=>{
         }   
     })
 })
+
+app.put("/",(req,res)=>{
+    const {uId , updatedValue} = req.body
+    // const obj = {
+    //     uId : uId,
+    //     updatedValue  : updatedValue 
+    // }
+    // console.log(obj)    
+    try {
+        postModel.findOneAndUpdate(  {uId : uId} ,{title : updatedValue  },(err,data)=>{
+            if(err){
+                throw err
+            }else{
+                res.send("SuccessFully UPDATAED....")
+            }
+        })
+    } catch (error) {
+            console.log(error);
+    }
+
+
+})
+
 
 app.listen(port, () => console.log(`Server is Running on localhost:${port}`))
 
